@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="medium">16dp</dimen>
+    <dimen name="swipeWidth">85dp</dimen>
+    <dimen name="header_height">60dp</dimen>
+</resources>
