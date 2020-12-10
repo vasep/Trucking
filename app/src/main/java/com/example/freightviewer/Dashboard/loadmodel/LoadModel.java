@@ -3,9 +3,9 @@ package com.example.freightviewer.Dashboard.loadmodel;
 public class LoadModel extends ListLoad{
 
     private String loadname;
-    int date;
+    String date;
 
-    public LoadModel(String loadname, int date){
+    public LoadModel(String loadname, String date){
         this.loadname = loadname;
         this.date = date;
     }
@@ -14,7 +14,7 @@ public class LoadModel extends ListLoad{
         return loadname;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 }

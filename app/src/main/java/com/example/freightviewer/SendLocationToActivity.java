@@ -2,7 +2,7 @@ package com.example.freightviewer;
 
 import android.location.Location;
 
-public class SerndLocationToActivity {
+public class SendLocationToActivity {
     private Location location;
 
     public Location getLocation() {
@@ -13,7 +13,7 @@ public class SerndLocationToActivity {
         this.location = location;
     }
 
-    public SerndLocationToActivity(Location mLocation) {
+    public SendLocationToActivity(Location mLocation) {
         this.location=mLocation;
     }
 }

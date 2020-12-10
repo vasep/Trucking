@@ -1,4 +1,4 @@
-package com.example.freightviewer;
+package com.example.freightviewer.HttpRequests;
 
 import com.example.freightviewer.Model.Load;
 import com.example.freightviewer.Model.User;
@@ -21,19 +21,19 @@ import retrofit2.http.Part;
 import retrofit2.http.Url;
 
 public interface JSONPlaceHolderApi {
-    @GET("mobile/drivers/loads/paginated?pageNumber=0&pageSize=20&status=Completed")
-    Call<JsonObject> getLoadsForDriverCompletedLoads(@Header("Authorization")String auth);
-
-    @GET("mobile/drivers/loads/paginated?pageNumber=0&pageSize=20&status=Upcoming")
-    Call<JsonObject> getLoadsForDriverUpcomingLoads(@Header("Authorization")String auth);
+    @GET
+    Call<JsonObject> getLoadsForDriver(@Header("Authorization")String auth,@Url String url);
 
     @GET
-    Call<JsonObject > getLoadByIdForDriver(@Header("Authorization")String auth,@Url String url);
+    Call<JsonObject> getLoadByIdForDriver(@Header("Authorization")String auth,@Url String url);
+
+    @GET
+    Call<Void> updateLoadStopStatus(@Header("Authorization")String auth,@Url String url);
 
     @POST("/token/generate-token")
     Call<User> generateTokenDriver(@Body User user);
 
     @Multipart
-    @POST("file/upload/pdf/310")
-    Call<JsonObject> uploadPdf(@Header("Authorization")String auth,@Part MultipartBody.Part file);
+    @POST("file/upload/pdf/0")
+    Call<Void> uploadPdf(@Header("Authorization")String auth,@Part MultipartBody.Part file);
 }

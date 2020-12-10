@@ -1,8 +1,11 @@
 package com.example.freightviewer.Dashboard.loadmodel;
 
- public class Header extends ListLoad {
+import com.yuyang.stickyheaders.StickyHeaderModel;
+
+public class Header extends ListLoad implements StickyHeaderModel {
+
     private String header;
-    public  static int date;
+    public  static String date;
 
     public String getHeader() {
         return header;

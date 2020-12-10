@@ -2,9 +2,9 @@ package com.example.freightviewer.Dashboard.loadmodel;
 
 public class ListLoad {
     private String loadname;
-    int date;
+    String date;
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 

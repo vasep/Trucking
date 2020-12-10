@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.freightviewer.Dashboard.FirstFragment"
+        android:name="com.example.freightviewer.Dashboard.CompletedLoadsFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/completed_fragment_layout">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,29 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.freightviewer.Dashboard.SecondFragment"
+        android:name="com.example.freightviewer.Dashboard.UpcomingLoadsFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/upcoming_fragment_layout">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.freightviewer.Dashboard.CompletedLoadsFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/completed_fragment_layout">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.freightviewer.Dashboard.UpcomingLoadsFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/upcoming_fragment_layout">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

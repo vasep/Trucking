@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="70dp"
+    android:id="@+id/card_view_cell"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="1dp"
+    android:elevation="2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/date_header"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:layout_gravity="center"
         android:textAlignment="center"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Odame Jako"></TextView>
-</RelativeLayout>
+        android:textSize="16sp"
+        android:padding="5dp" />
+
+</androidx.cardview.widget.CardView>
