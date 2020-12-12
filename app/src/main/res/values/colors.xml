@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#1e90ff</color>
-    <color name="colorPrimaryDark">#6897aa</color>
+    <color name="colorPrimaryDark">#1070CD</color>
     <color name="colorAccent">#cafbff</color>
     <color name="background_color">#efeeec</color>
+
+    <color name="cell_text_color">#ffffff</color>
+    <color name="cell_icon_color">#ffffff</color>
+
 </resources>

@@ -26,10 +26,190 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:id="@+id/aa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
+                //customer row
+                <LinearLayout
+                    android:id="@+id/customerid_row"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/customer_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cell_text_color"
+                        android:text=""/>
+
+                </LinearLayout>
+
+                //user/broker row
+                <LinearLayout
+                    android:id="@+id/user_broker_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/user_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_user_driver"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:id="@+id/broker_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_broker"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                //minor load data
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    //trailer data
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:id="@+id/trailer_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_truck_trailer"
+                            android:layout_width="@dimen/minor_data_image"
+                            android:layout_height="@dimen/minor_data_image" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+                    //truck data
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:id="@+id/trcuk_data_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_truck"
+                            android:layout_width="@dimen/minor_data_image"
+                            android:layout_height="@dimen/minor_data_image" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+                    //miles data
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:id="@+id/miles_data_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_speedometer"
+                            android:layout_width="@dimen/minor_data_image"
+                            android:layout_height="@dimen/minor_data_image" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+                    //temperature data
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:id="@+id/temperature_data_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_thermometer_lines"
+                            android:layout_width="@dimen/minor_data_image"
+                            android:layout_height="@dimen/minor_data_image" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/total"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cell_text_color"
+                        android:text=""/>
+                </LinearLayout>
+
+            </LinearLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/contraintContainer"
+                android:layout_below="@+id/aa"
                 android:focusableInTouchMode="true">
 
                 <TextView
@@ -48,6 +228,7 @@
                     android:id="@+id/tripRateText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/tripRateLabel"
                     app:layout_constraintStart_toStartOf="@+id/tripRateLabel"
                     app:layout_constraintTop_toBottomOf="@+id/tripRateLabel" />
@@ -71,7 +252,7 @@
                     android:id="@+id/customerLoadText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/customerLoadLabel"
                     app:layout_constraintStart_toStartOf="@+id/customerLoadLabel"
                     app:layout_constraintTop_toBottomOf="@+id/customerLoadLabel" />
@@ -92,6 +273,7 @@
                 <TextView
                     android:id="@+id/customerBrokerText"
                     android:layout_width="0dp"
+                    android:text=" "
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/customerBrokerLabel"
                     app:layout_constraintStart_toStartOf="@+id/customerBrokerLabel"
@@ -113,6 +295,7 @@
                     android:id="@+id/truckNumberText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/truckNumberLabel"
                     app:layout_constraintStart_toStartOf="@+id/truckNumberLabel"
                     app:layout_constraintTop_toBottomOf="@+id/truckNumberLabel" />
@@ -133,6 +316,7 @@
                     android:id="@+id/trailerNumberText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/trailerNumberLabel"
                     app:layout_constraintStart_toStartOf="@+id/trailerNumberLabel"
                     app:layout_constraintTop_toBottomOf="@+id/trailerNumberLabel" />
@@ -153,6 +337,7 @@
                     android:id="@+id/driverText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/driverLabel"
                     app:layout_constraintStart_toStartOf="@+id/driverLabel"
                     app:layout_constraintTop_toBottomOf="@+id/driverLabel" />
@@ -172,6 +357,7 @@
                 <TextView
                     android:id="@+id/emptyMilesText"
                     android:layout_width="0dp"
+                    android:text=" "
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/emptyMilesLabel"
                     app:layout_constraintHorizontal_bias="0.529"
@@ -194,6 +380,7 @@
                     android:id="@+id/loadMilesText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/loadMilesLabel"
                     app:layout_constraintStart_toStartOf="@+id/loadMilesLabel"
                     app:layout_constraintTop_toBottomOf="@+id/loadMilesLabel" />
@@ -214,6 +401,7 @@
                     android:id="@+id/totalMilesText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/totalMilesLabel"
                     app:layout_constraintStart_toStartOf="@+id/totalMilesLabel"
                     app:layout_constraintTop_toBottomOf="@+id/totalMilesLabel" />
@@ -234,6 +422,7 @@
                     android:id="@+id/temperatureText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text=" "
                     app:layout_constraintEnd_toEndOf="@+id/temperatureLabel"
                     app:layout_constraintStart_toStartOf="@+id/temperatureLabel"
                     app:layout_constraintTop_toBottomOf="@+id/temperatureLabel" />
@@ -253,7 +442,7 @@
 
                 <LinearLayout
                     android:id="@+id/parentStopsLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="@+id/textView21"
@@ -266,4 +455,5 @@
         </RelativeLayout>
 
     </ScrollView>
+
 </RelativeLayout>

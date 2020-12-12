@@ -35,6 +35,7 @@ public class ShareActivity extends AppCompatActivity {
     Button completeUploadBtn;
     ProgressBar progressBar;
     TextView textView,successTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,8 @@ public class ShareActivity extends AppCompatActivity {
         // Get the intent that started this activity
         if (isActivityLaunchedFromActionSend && isPdfData) {
             handleSendPdf(getIntent());
+        } else {
+            displayDialogOnFail();
         }
     }
 
@@ -67,39 +70,12 @@ public class ShareActivity extends AppCompatActivity {
 
             final File file = new File(getCacheDir(), displayName(extraStream));
 
-            InputStream inputStream = null;
-            try {
-                inputStream = getContentResolver().openInputStream(extraStream);
-                if (inputStream != null) {
-                    OutputStream output = new FileOutputStream(file);
+            requestContentResolver(extraStream, file);
 
-                    byte[] buffer = new byte[4 * 1024]; // or other buffer size
-                    int read;
-
-                    while ((read = inputStream.read(buffer)) != -1) {
-                        output.write(buffer, 0, read);
-                    }
-
-                    output.flush();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (inputStream != null) {
-                        inputStream.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            RequestBody requestFile =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
             // MultipartBody.Part is used to send also the actual file name
-            MultipartBody.Part body =
-                    MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
             Call<Void> call = RetroClient.getApiService().uploadPdf("Bearer " +
                     Constants.userToken, body);
@@ -107,41 +83,79 @@ public class ShareActivity extends AppCompatActivity {
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Log.d("pdfErrorCode", "" + response.code());
-                    Log.d("pdfErrorMessage", "" + response.message());
                     if (call.isExecuted()){
-                        Toast.makeText(getApplicationContext(),"Upload Successful",Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.INVISIBLE);
-                        completeUploadImage.setVisibility(View.VISIBLE);
-                        completeUploadBtn.setVisibility(View.VISIBLE);
-                        textView.setVisibility(View.GONE);
-                        successTxt.setVisibility(View.VISIBLE);
-                        file.delete();
-
-                        completeUploadBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                finish();
-                            }
-                        });
+                        displayDialogOnSuccess(file);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Log.d("pdfUploadFailed", "" + t.getMessage());
-                    Toast.makeText(getApplicationContext(),"Paperwork Failed to Upload",Toast.LENGTH_LONG).show();
-//                        progressBar.setVisibility(View.INVISIBLE);
-//                        failedUploadImage.setVisibility(View.VISIBLE);
-//                        completeUploadBtn.setVisibility(View.VISIBLE);
-//                        textView.setVisibility(View.GONE);
-//                        successTxt.setText("Upload Failed");
-//                        successTxt.setVisibility(View.VISIBLE);
-//                        view.setVisibility(View.GONE);
-//                        finish();
+                    displayDialogOnFail();
                 }
             });
         }
+    }
+
+    private void requestContentResolver(Uri extraStream, File file) {
+        InputStream inputStream = null;
+        try {
+            inputStream = getContentResolver().openInputStream(extraStream);
+            if (inputStream != null) {
+                OutputStream output = new FileOutputStream(file);
+
+                byte[] buffer = new byte[4 * 1024]; // or other buffer size
+                int read;
+
+                while ((read = inputStream.read(buffer)) != -1) {
+                    output.write(buffer, 0, read);
+                }
+
+                output.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void displayDialogOnFail() {
+        Toast.makeText(getApplicationContext(),"Paperwork Failed to Upload",Toast.LENGTH_LONG).show();
+        progressBar.setVisibility(View.INVISIBLE);
+        failedUploadImage.setVisibility(View.VISIBLE);
+        completeUploadBtn.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.GONE);
+        successTxt.setText("Upload Failed");
+        successTxt.setVisibility(View.VISIBLE);
+        completeUploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void displayDialogOnSuccess(File file) {
+        Toast.makeText(getApplicationContext(),"Upload Successful",Toast.LENGTH_LONG).show();
+        progressBar.setVisibility(View.INVISIBLE);
+        completeUploadImage.setVisibility(View.VISIBLE);
+        completeUploadBtn.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.GONE);
+        successTxt.setVisibility(View.VISIBLE);
+        file.delete();
+
+        completeUploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private String displayName(Uri uri) {

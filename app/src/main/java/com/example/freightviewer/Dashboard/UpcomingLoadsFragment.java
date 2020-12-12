@@ -32,66 +32,63 @@ public class UpcomingLoadsFragment extends Fragment {
     UpcomingLoadsFragmentAdapter adapter;
     ArrayList<Integer> arrayLoads = new ArrayList<>();
     ProgressBar progressBar;
-
-    public UpcomingLoadsFragment(){
-        setRetainInstance(true);
-    }
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        // Inflate the layout for this fragment
-
+            Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.upcoming_fragment_layout, container, false);
+
+        recyclerView = view.findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
-        Call<JsonObject> call = RetroClient.getApiService().getLoadsForDriver("Bearer " +
-                Constants.userToken,"mobile/drivers/loads/paginated?pageNumber=0&pageSize=20&status=Upcoming");
-        final RecyclerView recyclerView = view.findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Enqueue to call on the back thread
+        fetchUpcomingLoads(0);
+
+        return view;
+    }
+
+    private void fetchUpcomingLoads(int page) {
+        Call<JsonObject> call = RetroClient.getApiService().getLoadsForDriver("Bearer " +
+                Constants.userToken,"mobile/drivers/loads/paginated?pageNumber="+page+"&pageSize=20&status=Upcoming");
+
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Context context = getActivity();
-                if (context != null) {
-                    if(!response.isSuccessful()){
-                        Log.d("RetrofitA",""+response.code());
-                        return;
-                    }
-
+                if (context != null && response.body() != null) {
                     JsonArray jsonArrayObject = response.body().getAsJsonArray("genericModel");
-                    ArrayList<Integer> loadsIdArray = new ArrayList<>();
-
-                    for (int i = 0; i < jsonArrayObject.size(); i++) {
-
-                        JsonElement idElement = jsonArrayObject.get(i);
-                        JsonObject idElementObject = (JsonObject) idElement;
-                        int id = Integer.valueOf(idElementObject.get("id").toString());
-                        loadsIdArray.add(id);
-                    }
-                    arrayLoads = loadsIdArray;
-                    // set up the RecyclerView
-
-                    adapter = new UpcomingLoadsFragmentAdapter(context, loadsIdArray);
-
-                    progressBar.setVisibility(View.GONE);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setVisibility(View.VISIBLE);
+                    prepareRecyclerViewData(jsonArrayObject);
+                    showLoads(context);
                 }
-
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.d("Retrofit C",t.getMessage());
+                Log.d(
+                        "Retrofit C",t.getMessage());
             }
         });
-        return view;
+    }
+
+    private void prepareRecyclerViewData(JsonArray jsonArrayObject) {
+        for (int i = 0; i < jsonArrayObject.size(); i++) {
+            JsonElement idElement = jsonArrayObject.get(i);
+            JsonObject idElementObject = (JsonObject) idElement;
+            int id = Integer.valueOf(idElementObject.get("id").toString());
+            arrayLoads.add(id);
+        }
+    }
+
+    private void showLoads(Context context) {
+        adapter = new UpcomingLoadsFragmentAdapter(context, arrayLoads);
+
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }
