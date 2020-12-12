@@ -1,6 +1,7 @@
 package com.example.freightviewer.HttpRequests;
 
 import com.example.freightviewer.Model.Load;
+import com.example.freightviewer.Model.LoadModel;
 import com.example.freightviewer.Model.User;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -25,7 +26,7 @@ public interface JSONPlaceHolderApi {
     Call<JsonObject> getLoadsForDriver(@Header("Authorization")String auth,@Url String url);
 
     @GET
-    Call<JsonObject> getLoadByIdForDriver(@Header("Authorization")String auth,@Url String url);
+    Call<LoadModel> getLoadByIdForDriver(@Header("Authorization")String auth, @Url String url);
 
     @GET
     Call<Void> updateLoadStopStatus(@Header("Authorization")String auth,@Url String url);

@@ -27,7 +27,6 @@ import retrofit2.Response;
 
 public class CompletedLoadsFragment extends Fragment {
     private ArrayList<Integer> arrayList = new ArrayList<>();
-    public MutableLiveData<ArrayList<Integer>> mutableLiveData = new MutableLiveData<>();
     CompletedLoadsFragmentAdapter adapter;
     ProgressBar progressBar;
     RecyclerView recyclerView;
