@@ -37,7 +37,7 @@ class CompletedLoadsFragmentAdapter extends RecyclerView.Adapter<CompletedLoadsF
 
     @Override
     public void onBindViewHolder(@NonNull CompletedLoadsFragmentAdapter.ViewHolder holder, int position) {
-        holder.myTextView.setText("Load#: " + String.valueOf(mData.get(position)));
+        holder.myTextView.setText(String.valueOf(mData.get(position)));
     }
 
     @Override

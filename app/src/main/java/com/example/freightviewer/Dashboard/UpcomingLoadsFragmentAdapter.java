@@ -37,7 +37,7 @@ class UpcomingLoadsFragmentAdapter extends RecyclerView.Adapter<UpcomingLoadsFra
 
     @Override
     public void onBindViewHolder(@NonNull UpcomingLoadsFragmentAdapter.ViewHolder holder, int position) {
-        holder.myTextView.setText("Load#: " + String.valueOf(mData.get(position)));
+        holder.myTextView.setText(String.valueOf(mData.get(position)));
     }
 
     @Override
