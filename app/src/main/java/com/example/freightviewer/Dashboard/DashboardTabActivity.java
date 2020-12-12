@@ -1,5 +1,6 @@
 package com.example.freightviewer.Dashboard;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -7,10 +8,12 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.freightviewer.CellDetails.CellActivity;
 import com.example.freightviewer.Login.MainLoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -30,12 +33,12 @@ public class DashboardTabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_tab);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Dashboard");
+        toolbar.setTitle("Loads Dashboard");
         setSupportActionBar(toolbar);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListerner);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CompletedLoadsFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CompletedLoadsFragment()).commit();
 
 
     }
@@ -45,10 +48,25 @@ public class DashboardTabActivity extends AppCompatActivity {
         menu.add("Logout").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                pref.edit().remove("userToken").apply();
-                startActivity(new Intent(getApplicationContext(), MainLoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(DashboardTabActivity.this)
+                        .setMessage("Are you sure you want to Log Out?")
+                        .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                pref.edit().remove("userToken").apply();
+                                startActivity(new Intent(getApplicationContext(), MainLoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Dissmiss", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        });
+                alertDialog.create();
+                alertDialog.show();
+
                 return false;
             }
         });
@@ -63,7 +81,7 @@ public class DashboardTabActivity extends AppCompatActivity {
 
                     View completeBtn = findViewById(R.id.completed_menu_item);
 //                    final View upcomingBtn = findViewById(R.id.upcoming_menu_item);
-                    boolean buttonClick= false;
+                    boolean buttonClick = false;
 
                     switch (item.getItemId()) {
                         case R.id.completed_menu_item:
@@ -72,8 +90,8 @@ public class DashboardTabActivity extends AppCompatActivity {
                         case R.id.upcoming_menu_item:
                             selectedFragment = new UpcomingLoadsFragment();
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
-                return true;
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                    return true;
                 }
             };
 }

@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="40dp"
     android:padding="10dp"
-    android:background="@drawable/custom_background"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -19,6 +18,8 @@
         <TextView
             android:id="@+id/stop_type"
             android:text=""
+            style="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

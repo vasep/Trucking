@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,8 +44,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CellActivity extends AppCompatActivity {
     TextView customerLoadNmTxt, customerBrokerTxt, tripRateTxt, truckNmTxt,
-            trailerNmTxt, driverTxt, emptyMilesTxt, loadedMilesTxt, totalMilesTxt, temperatureTxt;
+            trailerNmTxt, driverTxt, milesTxt, temperatureTxt,driver2Txt;
     Toolbar toolbar;
+    ImageView driverImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +61,13 @@ public class CellActivity extends AppCompatActivity {
 
         customerLoadNmTxt = findViewById(R.id.customerLoadText);
         customerBrokerTxt = findViewById(R.id.customerBrokerText);
+        driverImage = findViewById(R.id.driver_image);
         tripRateTxt = findViewById(R.id.tripRateText);
         truckNmTxt = findViewById(R.id.truckNumberText);
         trailerNmTxt = findViewById(R.id.trailerNumberText);
         driverTxt = findViewById(R.id.driverText);
-        emptyMilesTxt = findViewById(R.id.emptyMilesText);
-        loadedMilesTxt = findViewById(R.id.loadMilesText);
-        totalMilesTxt = findViewById(R.id.totalMilesText);
+        driver2Txt=findViewById(R.id.driver2Text);
+        milesTxt = findViewById(R.id.miles_empty_loaded);
         temperatureTxt = findViewById(R.id.temperatureText);
 
         Call<LoadModel> call = RetroClient.getApiService().getLoadByIdForDriver("Bearer " +
@@ -95,21 +97,22 @@ public class CellActivity extends AppCompatActivity {
                 if (!isNullOrEmpty(loadModel.getCustomerLoad())) {
                     trailerNmTxt.setText(loadModel.getTrailer().getUnitNumber());
                 }
-                if (!isNullOrEmpty(loadModel.getDriver().getFirstName())) {
-                    if (!isNullOrEmpty(loadModel.getDriver().getLastName())){
-                        driverTxt.setText(loadModel.getDriver().getFirstName() + loadModel.getDriver().getLastName());
+
+                if (!isNullOrEmpty(loadModel.getDriver2().getFirstName()) && !isNullOrEmpty(loadModel.getDriver().getLastName())){
+                    driver2Txt.setText(loadModel.getDriver2().getFirstName() +" " +loadModel.getDriver2().getLastName());
+                }
+
+                if (!isNullOrEmpty(loadModel.getDriver().getFirstName()) && !isNullOrEmpty(loadModel.getDriver().getLastName())){
+                    driverTxt.setText(loadModel.getDriver().getFirstName() + " " + loadModel.getDriver().getLastName());
+                }
+
+                if (!isNullOrEmpty(String.valueOf(loadModel.getEmptyMiles()))) {
+                    milesTxt.setText(String.valueOf(loadModel.getEmptyMiles()));
+                    if (!isNullOrEmpty(String.valueOf(loadModel.getLoadedMiles()))){
+                        milesTxt.setText(String.valueOf(loadModel.getEmptyMiles())+"/"+String.valueOf(loadModel.getLoadedMiles()));
                     }
                 }
-                if (!isNullOrEmpty(String.valueOf(loadModel.getEmptyMiles()))) {
-                    emptyMilesTxt.setText(String.valueOf(loadModel.getEmptyMiles()));
-                }
-                if (!isNullOrEmpty(String.valueOf(loadModel.getLoadedMiles()))) {
-                    loadedMilesTxt.setText(String.valueOf(loadModel.getLoadedMiles()));
-                }
-                if (!isNullOrEmpty(String.valueOf(loadModel.getLoadedMiles())) && !isNullOrEmpty(String.valueOf(loadModel.getEmptyMiles()))) {
-                    double totalMiles = loadModel.getLoadedMiles() + loadModel.getEmptyMiles();
-                    totalMilesTxt.setText(String.valueOf(totalMiles));
-                }
+
                 if (!isNullOrEmpty(String.valueOf(loadModel.getTemperature()))) {
                     temperatureTxt.setText(String.valueOf(loadModel.getTemperature()));
                 }
@@ -205,12 +208,6 @@ public class CellActivity extends AppCompatActivity {
             loadedBtn.setText("Unloaded");
         }
 
-//        stopsTxt.setText("" + Integer.toString(stopNumber) + ". Type: " + loadModel.getLoadStops().getLoadStop().get(i).getStopType().getValue().toString()+ "\n" +
-//                "     " + "Street: " + stopStreet + "\n" +
-//                "     " + "City: " + stopCity + "\n" +
-//                "     " + "State: " + stopState + "\n" +
-//                "     " + "Zip: " + stopZip +"\n");
-
         parentStopLayout.addView(stopsLayout);
     }
 
@@ -222,7 +219,8 @@ public class CellActivity extends AppCompatActivity {
                 builder.setMessage("Confirm Action")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                loadedBtn.setTextColor(Color.GREEN);
+                                loadedBtn.setTextColor(Color.WHITE);
+                                loadedBtn.setBackgroundColor(Color.GREEN);
                                 loadedBtn.setEnabled(false);
 
                                 Call<Void> pressedLoadCall = RetroClient.getApiService().updateLoadStopStatus("Bearer " +
@@ -260,10 +258,11 @@ public class CellActivity extends AppCompatActivity {
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CellActivity.this);
-                builder.setMessage("Confirm Action")
+                builder.setMessage("Are you sure you want to perform this action ")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                arrivedBtn.setTextColor(Color.GREEN);
+                                arrivedBtn.setTextColor(Color.WHITE);
+                                arrivedBtn.setBackgroundColor(Color.GREEN);
                                 arrivedBtn.setEnabled(false);
 
                                 Call<Void> pressedLoadCall = RetroClient.getApiService().updateLoadStopStatus("Bearer " +
@@ -301,9 +300,8 @@ public class CellActivity extends AppCompatActivity {
     }
 
     private boolean isNullOrEmpty(String str) {
-        if (str != null && !str.isEmpty())
+        if (str != null || !TextUtils.isEmpty(str))
             return false;
         return true;
     }
-
 }

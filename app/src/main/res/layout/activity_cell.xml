@@ -7,19 +7,18 @@
     tools:context=".CellDetails.CellActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/white"
-        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:theme="@style/MyThemeOverlay_Toolbar"
-        android:id="@+id/toolbar">
-    </androidx.appcompat.widget.Toolbar>
+        app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
         <RelativeLayout
             android:id="@+id/relativeLay"
@@ -27,72 +26,98 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/aa"
+                android:id="@+id/cell_data_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
                 //customer row
-                <LinearLayout
-                    android:id="@+id/customerid_row"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/customer_id"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/cell_text_color"
-                        android:text=""/>
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/customerLoadLabel"
+                            android:layout_width="match_parent"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"
+                            android:text="Customer Load:"
+                            android:textColor="@color/cell_text_color" />
+
+                        <TextView
+                            android:id="@+id/customerLoadText"
+                            android:layout_width="match_parent"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
 
                 //user/broker row
+
                 <LinearLayout
                     android:id="@+id/user_broker_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/user_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:src="@drawable/ic_user_driver"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp" />
+                            android:id="@+id/driver_image"
+                            android:layout_width="@dimen/data_image"
+                            android:layout_height="@dimen/data_image"
+                            android:src="@drawable/ic_user_driver" />
+
                         <TextView
+                            android:id="@+id/driverText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/cell_text_color" />
+                        <TextView
+                            android:id="@+id/driver2Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/cell_text_color" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:id="@+id/broker_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:src="@drawable/ic_broker"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp" />
+                            android:layout_width="@dimen/data_image"
+                            android:layout_height="@dimen/data_image"
+                            android:src="@drawable/ic_broker" />
+
                         <TextView
+                            android:id="@+id/customerBrokerText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/cell_text_color" />
 
                     </LinearLayout>
@@ -100,86 +125,104 @@
                 </LinearLayout>
 
                 //minor load data
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     //trailer data
+
                     <LinearLayout
-                        android:layout_weight="1"
                         android:id="@+id/trailer_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:src="@drawable/ic_truck_trailer"
                             android:layout_width="@dimen/minor_data_image"
-                            android:layout_height="@dimen/minor_data_image" />
+                            android:layout_height="@dimen/minor_data_image"
+                            android:src="@drawable/ic_truck_trailer" />
+
                         <TextView
+                            android:id="@+id/trailerNumberText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/cell_text_color" />
 
                     </LinearLayout>
 
                     //truck data
+
                     <LinearLayout
-                        android:layout_weight="1"
                         android:id="@+id/trcuk_data_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:src="@drawable/ic_truck"
                             android:layout_width="@dimen/minor_data_image"
-                            android:layout_height="@dimen/minor_data_image" />
+                            android:layout_height="@dimen/minor_data_image"
+                            android:src="@drawable/ic_truck" />
+
                         <TextView
+                            android:id="@+id/truckNumberText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/cell_text_color" />
 
                     </LinearLayout>
 
                     //miles data
+
                     <LinearLayout
-                        android:layout_weight="1"
                         android:id="@+id/miles_data_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:src="@drawable/ic_speedometer"
                             android:layout_width="@dimen/minor_data_image"
-                            android:layout_height="@dimen/minor_data_image" />
+                            android:layout_height="@dimen/minor_data_image"
+                            android:src="@drawable/ic_speedometer" />
+
                         <TextView
+                            android:id="@+id/miles_empty_loaded"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/cell_text_color" />
 
                     </LinearLayout>
 
                     //temperature data
+
                     <LinearLayout
-                        android:layout_weight="1"
                         android:id="@+id/temperature_data_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:src="@drawable/ic_thermometer_lines"
                             android:layout_width="@dimen/minor_data_image"
-                            android:layout_height="@dimen/minor_data_image" />
+                            android:layout_height="@dimen/minor_data_image"
+                            android:src="@drawable/ic_thermometer_lines" />
+
                         <TextView
+                            android:id="@+id/temperatureText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/cell_text_color" />
@@ -187,270 +230,40 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/total"
+                    <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/cell_text_color"
-                        android:text=""/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tripRateLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Trip Rate:"
+                            android:textColor="@color/cell_text_color" />
+
+                        <TextView
+                            android:id="@+id/tripRateText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text=""
+                            android:textColor="@color/cell_text_color" />
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/parentStopsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/contraintContainer"
-                android:layout_below="@+id/aa"
-                android:focusableInTouchMode="true">
-
-                <TextView
-                    android:id="@+id/tripRateLabel"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Trip Rate"
-                    android:textSize="@dimen/list_item_title"
-                    app:layout_constraintEnd_toEndOf="@+id/customerBrokerText"
-                    app:layout_constraintStart_toStartOf="@+id/customerBrokerText"
-                    app:layout_constraintTop_toBottomOf="@+id/customerBrokerText" />
-
-                <TextView
-                    android:id="@+id/tripRateText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/tripRateLabel"
-                    app:layout_constraintStart_toStartOf="@+id/tripRateLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/tripRateLabel" />
-
-                <TextView
-                    android:id="@+id/customerLoadLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_marginEnd="8dp"
-                    android:textSize="@dimen/list_item_title"
-                    android:text="Customer Load Number"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/customerLoadText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/customerLoadLabel"
-                    app:layout_constraintStart_toStartOf="@+id/customerLoadLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/customerLoadLabel" />
-
-
-                <TextView
-                    android:id="@+id/customerBrokerLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_marginTop="16dp"
-                    android:text="Broker"
-                    android:textSize="@dimen/list_item_title"
-                    app:layout_constraintEnd_toEndOf="@+id/customerLoadText"
-                    app:layout_constraintStart_toStartOf="@+id/customerLoadText"
-                    app:layout_constraintTop_toBottomOf="@+id/customerLoadText" />
-
-                <TextView
-                    android:id="@+id/customerBrokerText"
-                    android:layout_width="0dp"
-                    android:text=" "
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@+id/customerBrokerLabel"
-                    app:layout_constraintStart_toStartOf="@+id/customerBrokerLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/customerBrokerLabel" />
-
-                <TextView
-                    android:id="@+id/truckNumberLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:textSize="@dimen/list_item_title"
-                    android:layout_marginTop="16dp"
-                    android:text="Truck Number"
-                    app:layout_constraintEnd_toEndOf="@+id/tripRateText"
-                    app:layout_constraintStart_toStartOf="@+id/tripRateText"
-                    app:layout_constraintTop_toBottomOf="@+id/tripRateText" />
-
-                <TextView
-                    android:id="@+id/truckNumberText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/truckNumberLabel"
-                    app:layout_constraintStart_toStartOf="@+id/truckNumberLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/truckNumberLabel" />
-
-                <TextView
-                    android:id="@+id/trailerNumberLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_marginTop="16dp"
-                    android:textSize="@dimen/list_item_title"
-                    android:text="Trailer Number"
-                    app:layout_constraintEnd_toEndOf="@+id/truckNumberText"
-                    app:layout_constraintStart_toStartOf="@+id/truckNumberText"
-                    app:layout_constraintTop_toBottomOf="@+id/truckNumberText" />
-
-                <TextView
-                    android:id="@+id/trailerNumberText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/trailerNumberLabel"
-                    app:layout_constraintStart_toStartOf="@+id/trailerNumberLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/trailerNumberLabel" />
-
-                <TextView
-                    android:id="@+id/driverLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:textSize="@dimen/list_item_title"
-                    android:text="Driver"
-                    app:layout_constraintEnd_toEndOf="@+id/trailerNumberText"
-                    app:layout_constraintStart_toStartOf="@+id/trailerNumberText"
-                    app:layout_constraintTop_toBottomOf="@+id/trailerNumberText" />
-
-                <TextView
-                    android:id="@+id/driverText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/driverLabel"
-                    app:layout_constraintStart_toStartOf="@+id/driverLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/driverLabel" />
-
-                <TextView
-                    android:id="@+id/emptyMilesLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/list_item_title"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_marginTop="16dp"
-                    android:text="Empty Miles"
-                    app:layout_constraintEnd_toEndOf="@+id/driverText"
-                    app:layout_constraintStart_toStartOf="@+id/driverText"
-                    app:layout_constraintTop_toBottomOf="@+id/driverText" />
-
-                <TextView
-                    android:id="@+id/emptyMilesText"
-                    android:layout_width="0dp"
-                    android:text=" "
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@+id/emptyMilesLabel"
-                    app:layout_constraintHorizontal_bias="0.529"
-                    app:layout_constraintStart_toStartOf="@+id/emptyMilesLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/emptyMilesLabel" />
-
-                <TextView
-                    android:id="@+id/loadMilesLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textSize="@dimen/list_item_title"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:text="Loaded Miles"
-                    app:layout_constraintEnd_toEndOf="@+id/emptyMilesText"
-                    app:layout_constraintStart_toStartOf="@+id/emptyMilesText"
-                    app:layout_constraintTop_toBottomOf="@+id/emptyMilesText" />
-
-                <TextView
-                    android:id="@+id/loadMilesText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/loadMilesLabel"
-                    app:layout_constraintStart_toStartOf="@+id/loadMilesLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/loadMilesLabel" />
-
-                <TextView
-                    android:id="@+id/totalMilesLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:textSize="@dimen/list_item_title"
-                    android:text="Total Miles"
-                    app:layout_constraintEnd_toEndOf="@+id/loadMilesText"
-                    app:layout_constraintStart_toStartOf="@+id/loadMilesText"
-                    app:layout_constraintTop_toBottomOf="@+id/loadMilesText" />
-
-                <TextView
-                    android:id="@+id/totalMilesText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/totalMilesLabel"
-                    app:layout_constraintStart_toStartOf="@+id/totalMilesLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/totalMilesLabel" />
-
-                <TextView
-                    android:id="@+id/temperatureLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_marginTop="16dp"
-                    android:textSize="@dimen/list_item_title"
-                    android:text="Temperature"
-                    app:layout_constraintEnd_toEndOf="@+id/totalMilesText"
-                    app:layout_constraintStart_toStartOf="@+id/totalMilesText"
-                    app:layout_constraintTop_toBottomOf="@+id/totalMilesText" />
-
-                <TextView
-                    android:id="@+id/temperatureText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    app:layout_constraintEnd_toEndOf="@+id/temperatureLabel"
-                    app:layout_constraintStart_toStartOf="@+id/temperatureLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/temperatureLabel" />
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:textSize="@dimen/list_item_title"
-                    android:text="Stops: "
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintEnd_toEndOf="@+id/temperatureText"
-                    app:layout_constraintStart_toStartOf="@+id/temperatureText"
-                    app:layout_constraintTop_toBottomOf="@+id/temperatureText" />
-
-                <LinearLayout
-                    android:id="@+id/parentStopsLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="@+id/textView21"
-                    app:layout_constraintStart_toStartOf="@+id/textView21"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21">
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cell_data_layout"
+                android:orientation="vertical"></LinearLayout>
 
         </RelativeLayout>
 
