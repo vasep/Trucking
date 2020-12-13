@@ -43,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class CellActivity extends AppCompatActivity {
-    TextView customerLoadNmTxt, customerBrokerTxt, tripRateTxt, truckNmTxt,
+    TextView customerLoadNmTxt, customerBrokerTxt, truckNmTxt,
             trailerNmTxt, driverTxt, milesTxt, temperatureTxt,driver2Txt;
     Toolbar toolbar;
     ImageView driverImage;
@@ -62,7 +62,6 @@ public class CellActivity extends AppCompatActivity {
         customerLoadNmTxt = findViewById(R.id.customerLoadText);
         customerBrokerTxt = findViewById(R.id.customerBrokerText);
         driverImage = findViewById(R.id.driver_image);
-        tripRateTxt = findViewById(R.id.tripRateText);
         truckNmTxt = findViewById(R.id.truckNumberText);
         trailerNmTxt = findViewById(R.id.trailerNumberText);
         driverTxt = findViewById(R.id.driverText);
@@ -87,9 +86,6 @@ public class CellActivity extends AppCompatActivity {
                 }
                 if (!isNullOrEmpty(loadModel.getCustomer().getCompanyName())) {
                     customerBrokerTxt.setText(loadModel.getCustomer().getCompanyName());
-                }
-                if (!isNullOrEmpty(String.valueOf(loadModel.getTripRate()))) {
-                    tripRateTxt.setText(String.valueOf(loadModel.getTripRate()));
                 }
                 if (!isNullOrEmpty(loadModel.getTruck().getUnitNumber())) {
                     truckNmTxt.setText(loadModel.getTruck().getUnitNumber());
@@ -179,7 +175,7 @@ public class CellActivity extends AppCompatActivity {
 
         //Get stops delivery type
         if (!isNullOrEmpty(loadModel.getLoadStops().getLoadStop().get(i).getStopType().toString())){
-            txtType.setText(Integer.toString(stopNumber)+ "." + " "+loadModel.getLoadStops().getLoadStop().get(i).getStopType().toString());
+            txtType.setText(Integer.toString(stopNumber)+ "." + " "+loadModel.getLoadStops().getLoadStop().get(i).getStopType().getValue());
         }
 
         //Get stops street
@@ -216,7 +212,7 @@ public class CellActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CellActivity.this);
-                builder.setMessage("Confirm Action")
+                builder.setMessage("Are you sure you want to perform this action?")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 loadedBtn.setTextColor(Color.WHITE);
@@ -258,7 +254,7 @@ public class CellActivity extends AppCompatActivity {
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CellActivity.this);
-                builder.setMessage("Are you sure you want to perform this action ")
+                builder.setMessage("Are you sure you want to perform this action?")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 arrivedBtn.setTextColor(Color.WHITE);
