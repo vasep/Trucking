@@ -1,16 +1,13 @@
 package com.example.freightviewer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-
 import com.example.freightviewer.Dashboard.DashboardTabActivity;
-import com.example.freightviewer.Login.MainLoginActivity;
+import com.example.freightviewer.Login.LoginActivity;
 import com.example.freightviewer.Utils.Constants;
 
 public class SplashActivity extends Activity {
@@ -33,7 +30,7 @@ public class SplashActivity extends Activity {
                 if (!Constants.userToken.equals("no data found")) {
                     startActivity(new Intent(getApplicationContext(), DashboardTabActivity.class));
                 } else {
-                    startActivity(new Intent(getApplicationContext(), MainLoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 }
                 finish();
             }

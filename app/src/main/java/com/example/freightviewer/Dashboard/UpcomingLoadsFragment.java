@@ -7,26 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.freightviewer.HttpRequests.JSONPlaceHolderApi;
 import com.example.freightviewer.HttpRequests.RetroClient;
 import com.example.freightviewer.R;
 import com.example.freightviewer.Utils.Constants;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UpcomingLoadsFragment extends Fragment {
     UpcomingLoadsFragmentAdapter adapter;
@@ -39,7 +32,6 @@ public class UpcomingLoadsFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.upcoming_fragment_layout, container, false);
-
         recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -53,7 +45,7 @@ public class UpcomingLoadsFragment extends Fragment {
 
     private void fetchUpcomingLoads(int page) {
         Call<JsonObject> call = RetroClient.getApiService().getLoadsForDriver("Bearer " +
-                Constants.userToken,"mobile/drivers/loads/paginated?pageNumber="+page+"&pageSize=20&status=Upcoming");
+                Constants.userToken, "mobile/drivers/loads/paginated?pageNumber=" + page + "&pageSize=20&status=Upcoming");
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -70,7 +62,7 @@ public class UpcomingLoadsFragment extends Fragment {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Log.d(
-                        "Retrofit C",t.getMessage());
+                        "Retrofit C", t.getMessage());
             }
         });
     }
