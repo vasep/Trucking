@@ -1,7 +1,6 @@
 package com.example.freightviewer.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,14 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.freightviewer.Dashboard.DashboardTabActivity;
 import com.example.freightviewer.HttpRequests.RetroClient;
 import com.example.freightviewer.Model.User;
 import com.example.freightviewer.R;
 import com.example.freightviewer.Utils.Constants;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -26,20 +22,17 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_login;
-    FusedLocationProviderClient fusedLocationProviderClient;
     TextInputEditText emailText, passwordText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_login2);
+        setContentView(R.layout.login_layout);
 
         btn_login = findViewById(R.id.btn_login);
         emailText = findViewById(R.id.enter_email);
         passwordText = findViewById(R.id.enter_password);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(LoginActivity.this);
-
 
         btn_login.setOnClickListener(this);
     }

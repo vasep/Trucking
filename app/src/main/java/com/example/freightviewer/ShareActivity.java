@@ -1,20 +1,18 @@
 package com.example.freightviewer;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.freightviewer.HttpRequests.RetroClient;
 import com.example.freightviewer.Utils.Constants;
@@ -34,20 +32,20 @@ public class ShareActivity extends AppCompatActivity {
     ImageView completeUploadImage, failedUploadImage;
     Button completeUploadBtn;
     ProgressBar progressBar;
-    TextView textView,successTxt;
+    TextView textView, successTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
 
-        progressBar=findViewById(R.id.cp_pbar);
-        failedUploadImage=findViewById(R.id.image_upload_failed);
-        completeUploadImage= findViewById(R.id.image_done);
-        completeUploadBtn= findViewById(R.id.work_complete_btn);
-        textView =findViewById(R.id.cp_title);
-        successTxt =findViewById(R.id.succesfull_upload);
-        view= findViewById(R.id.cp_bg_view);
+        progressBar = findViewById(R.id.cp_pbar);
+        failedUploadImage = findViewById(R.id.image_upload_failed);
+        completeUploadImage = findViewById(R.id.image_done);
+        completeUploadBtn = findViewById(R.id.work_complete_btn);
+        textView = findViewById(R.id.cp_title);
+        successTxt = findViewById(R.id.succesfull_upload);
+        view = findViewById(R.id.cp_bg_view);
         view.setVisibility(View.VISIBLE);
 
         boolean isActivityLaunchedFromActionSend = getIntent().getAction() == Intent.ACTION_SEND;
@@ -57,7 +55,7 @@ public class ShareActivity extends AppCompatActivity {
         if (isActivityLaunchedFromActionSend && isPdfData) {
             handleSendPdf(getIntent());
         } else {
-            displayDialogOnFail();
+            displayDialogOnFail(null);
         }
     }
 
@@ -83,14 +81,14 @@ public class ShareActivity extends AppCompatActivity {
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (call.isExecuted()){
+                    if (call.isExecuted()) {
                         displayDialogOnSuccess(file);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    displayDialogOnFail();
+                    displayDialogOnFail(file);
                 }
             });
         }
@@ -125,14 +123,16 @@ public class ShareActivity extends AppCompatActivity {
         }
     }
 
-    private void displayDialogOnFail() {
-        Toast.makeText(getApplicationContext(),"Paperwork Failed to Upload",Toast.LENGTH_LONG).show();
+    private void displayDialogOnFail(File file) {
+        Toast.makeText(getApplicationContext(), "Paperwork Failed to Upload", Toast.LENGTH_LONG).show();
         progressBar.setVisibility(View.INVISIBLE);
         failedUploadImage.setVisibility(View.VISIBLE);
         completeUploadBtn.setVisibility(View.VISIBLE);
         textView.setVisibility(View.GONE);
         successTxt.setText("Upload Failed");
         successTxt.setVisibility(View.VISIBLE);
+        file.delete();
+
         completeUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,15 +141,16 @@ public class ShareActivity extends AppCompatActivity {
         });
     }
 
-    private void displayDialogOnSuccess(File file) {
-        Toast.makeText(getApplicationContext(),"Upload Successful",Toast.LENGTH_LONG).show();
+    private void displayDialogOnSuccess(@Nullable File file) {
+        Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_LONG).show();
         progressBar.setVisibility(View.INVISIBLE);
         completeUploadImage.setVisibility(View.VISIBLE);
         completeUploadBtn.setVisibility(View.VISIBLE);
         textView.setVisibility(View.GONE);
         successTxt.setVisibility(View.VISIBLE);
-        file.delete();
-
+        if(file != null){
+            file.delete();
+        }
         completeUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

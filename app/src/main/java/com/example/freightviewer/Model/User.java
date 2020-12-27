@@ -6,6 +6,8 @@ public class User {
     public String token;
 
     public static String userToken;
+    public static boolean serviceIsBound = false;
+    public static boolean permissionAlreadyDenied = false;
 
     public String getToken() {
         return token;
