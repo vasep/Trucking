@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-            Toast.makeText(LoginActivity.this,"Log In Failed",Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this,"Log In Failed",Toast.LENGTH_LONG).show();
             }
         });
     }
