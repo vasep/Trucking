@@ -3,7 +3,6 @@ package com.example.freightviewer.CellDetails;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,32 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.freightviewer.HttpRequests.JSONPlaceHolderApi;
 import com.example.freightviewer.HttpRequests.RetroClient;
 import com.example.freightviewer.Model.LoadModel;
-import com.example.freightviewer.Model.LoadStop;
 import com.example.freightviewer.Model.StopType;
 import com.example.freightviewer.R;
 import com.example.freightviewer.Utils.Constants;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.internal.LinkedTreeMap;
-import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Type;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class CellActivity extends AppCompatActivity {
@@ -54,6 +36,7 @@ public class CellActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cell);
 
         int loadId = (int) getIntent().getExtras().get("loadId");
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Load#: " + String.valueOf(loadId));// load# od getIntent
         setSupportActionBar(toolbar);

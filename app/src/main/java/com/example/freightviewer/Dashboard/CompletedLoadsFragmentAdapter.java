@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.freightviewer.CellDetails.CellActivity;
 import com.example.freightviewer.R;
-
 import java.util.ArrayList;
 
 class CompletedLoadsFragmentAdapter extends RecyclerView.Adapter<CompletedLoadsFragmentAdapter.ViewHolder> {
@@ -21,6 +18,7 @@ class CompletedLoadsFragmentAdapter extends RecyclerView.Adapter<CompletedLoadsF
     private ArrayList<Integer> mData;
     private ItemClickListener mClickListener;
     private Context context;
+
 
     CompletedLoadsFragmentAdapter(Context context, ArrayList<Integer> data) {
         this.mInflater = LayoutInflater.from(context);
@@ -56,7 +54,8 @@ class CompletedLoadsFragmentAdapter extends RecyclerView.Adapter<CompletedLoadsF
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, CellActivity.class).putExtra("loadId",mData.get(getAdapterPosition()));
+                    Intent intent = new Intent(context, CellActivity.class);
+                    intent.putExtra("loadId",mData.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });
