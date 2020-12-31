@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroClient {
-    private static final String ROOT_URL = "http://truckingnew-env.eba-q2gns4ca.us-east-1.elasticbeanstalk.com/api/v1/trucking/";
+    private static final String ROOT_URL = "https://www.onecloudtms.com/";
 
     public RetroClient() {
     }
