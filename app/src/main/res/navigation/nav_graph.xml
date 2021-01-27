@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.freightviewer.Dashboard.CompletedLoadsFragment"
+        android:name="com.example.trucking.Dashboard.CompletedLoadsFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/completed_fragment_layout">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.freightviewer.Dashboard.UpcomingLoadsFragment"
+        android:name="com.example.trucking.Dashboard.UpcomingLoadsFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/upcoming_fragment_layout">
 
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.freightviewer.Dashboard.CompletedLoadsFragment"
+        android:name="com.example.trucking.Dashboard.CompletedLoadsFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/completed_fragment_layout">
 
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.freightviewer.Dashboard.UpcomingLoadsFragment"
+        android:name="com.example.trucking.Dashboard.UpcomingLoadsFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/upcoming_fragment_layout">
 

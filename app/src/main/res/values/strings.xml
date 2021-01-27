@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FreightOne</string>
+    <string name="app_name">Trucking</string>
     <string name="please_login_to_your_account">LOG INTO YOUR ACCOUNT.</string>
 
     <string name="latitude_label">Latitude</string>
